@@ -1,0 +1,193 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Project SOLID Documentation",
+    "description": "This is an API Rest criated to manage users",
+    "version": "1.0.0",
+    "contact": {
+      "email": "alvesrosaleonardo14@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create a user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Leonardo Alves Rosa",
+                  "email": "leonardo@example.com.br"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "User already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "List all users",
+        "description": "List all users",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "ID to search the user admin",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2d57e5ea-22fb-4d53-bd7e-41a7ec695414"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "Date"
+                      },
+                      "updated_at": {
+                        "type": "Date"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User is not admin"
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "List one user by ID",
+        "description": "List one user by ID",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ID to search the user admin",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2d57e5ea-22fb-4d53-bd7e-41a7ec695414"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "Date"
+                    },
+                    "updated_at": {
+                      "type": "Date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not exists"
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update a user to admin",
+        "description": "Update a user to admin",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ID to search the user",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2d57e5ea-22fb-4d53-bd7e-41a7ec695414"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Was not possible to do this update"
+          }
+        }
+      }
+    }
+  }
+}
